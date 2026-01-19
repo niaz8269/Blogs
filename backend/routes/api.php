@@ -63,4 +63,10 @@ Route::prefix('v1')->group(function () {
         Route::get('/dashboard/author', [DashboardController::class, 'author']);
         Route::get('/dashboard/admin', [DashboardController::class, 'admin']);
     });
+    // Admin Only Routes
+    Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+        Route::post('/blogs/{blog}/approve', [BlogApprovalController::class, 'approve']);
+        Route::get('/dashboard/admin', [DashboardController::class, 'admin']);
+        // Add other admin routes here
+    });
 });
